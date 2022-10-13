@@ -1,0 +1,44 @@
+﻿@model MVC_BookStore.Models.Sach
+
+<!--Hiển thị danh sách các sách cần quản lý-->
+
+
+<form action="/Admin/Books/Edit" method="post" enctype="multipart/form-data">
+    <div class="row>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Mã sách</label>
+                @Html.TextBoxFor(m => m.MaSach, "", new { @class = "form-control", @readonly = "readonly" })
+
+            </div>
+            <div class="form-group">
+                <label>Tên sách</label>
+                @Html.TextBoxFor(m => m.TenSach, "", new { @class = "form-control" })
+
+            </div>
+            <div class="form-group">
+                <label>Đơn giá</label>
+                @Html.TextBoxFor(m => m.Dongia, "", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Ảnh bìa</label><br />
+                <img src="~/Bia_sach/@Model.AnhBia" style="width:50px" />
+                @Html.TextBox("NewImage", "", new { @class = "form-control", type = "file" })
+                @Html.HiddenFor(m => m.AnhBia)
+            </div>
+            <div class="form-group">
+                <label>Tên chủ đề</label>
+                @Html.DropDownList("MaCD", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Nhà xuất bản</label>
+                @Html.DropDownList("MaNXB", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cập nhật" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+</form>
+
+S

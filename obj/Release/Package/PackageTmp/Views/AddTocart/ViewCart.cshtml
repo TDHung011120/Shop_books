@@ -1,0 +1,69 @@
+﻿@model MVC_BookStore.Models.Cart
+@{
+    ViewBag.Title = "ViewCart";
+
+
+}
+
+<div class="panel panel-info" style="margin-top:10px">
+    <div class="panel-heading">
+        <b>GIỎ HÀNG CỦA BẠN</b>
+    </div>
+    <div class="panel-body">
+        @if (Model.Items.Count > 0)
+        {
+            <table class="table table-bordered">
+                <tr>
+                    <th class="text-center">Hình sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                    <th>Tác vụ</th>
+                </tr>
+                @foreach (var item in Model.Items) //duyệt qua từng phần tử của giỏ hàng
+                {
+                    <form action="/AddTocart/Update" method="post">
+                    <tr>
+                        <td class="text-center">
+                            <img src="~/Bia_sach/@item.Sach.AnhBia" />
+                        </td>
+                        <td>@item.Sach.TenSach</td>
+                        <td>
+                            @Html.Hidden("id", item.Sach.MaSach)
+                            <input type="number" name="soluong"
+                                   value="@item.SoLuong" style="width:100px" class="form-control" />
+                        </td>
+                        <td>@Html.FormatValue(item.Sach.Dongia, "{0:#,##0} đồng")</td>
+                        <td>@Html.FormatValue(item.ThanhTien, "{0:#,##0} đồng")</td>
+                        <td>
+                            <button type="submit" class="btn btn-info">
+                                <span class="glyphicon glyphicon-edit"></span> Cập nhật
+                            </button>
+                            <a href="@Url.Action("Delete",
+                                    new { id = item.Sach.MaSach })" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-trash"></span> Xoá
+                            </a>
+                        </td>
+                    </tr>
+                    </form>
+                }
+            </table>
+            <p>
+                Tổng cộng <b>@Html.FormatValue(Model.TongThanhTien, "{0: #,##0} đồng")</b>
+            </p>
+            <div class="text-center">
+                @Html.ActionLink("Trả toàn bộ", "DeleteCart", "AddTocart",
+                new { @class = "btn btn-danger" })
+                @Html.ActionLink("Đặt hàng", "Checkout", "AddTocart",
+                new { @class = "btn btn-warning" })
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <h2>Giỏ hàng rỗng</h2>
+            </div>
+        }
+    </div>
+</div>

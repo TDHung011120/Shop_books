@@ -1,0 +1,35 @@
+﻿@model  MVC_BookStore.Models.Sach
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Thêm sách mới</h2>
+<form action="/Admin/Books/Create" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Tên sách</label>
+                @Html.TextBoxFor(m => m.TenSach, "", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Đơn giá</label>
+                @Html.TextBoxFor(m => m.Dongia, "", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Ảnh bìa</label>
+                @Html.TextBox("NewImage", "", new { @class = "form-control", type = "file" })
+                @Html.HiddenFor(m => m.AnhBia)
+            </div>
+            <div class="form-group">
+                <label>Tên chủ đề</label>
+                @Html.DropDownListFor(m=>m.MaCD, (SelectList)(ViewBag.MaCD),new {@class="form-control"})
+            </div>
+            <div class="form-group">
+                <label>Tên nhà xuất bản</label>
+                @Html.DropDownListFor(m => m.MaNXB, (SelectList)(ViewBag.MaNXB), new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="lưu" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>

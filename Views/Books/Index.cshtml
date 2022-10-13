@@ -1,0 +1,34 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<MVC_BookStore.Models.Sach>
+@{
+    ViewBag.Title = "BookStore";
+}
+<div class="alert alert-success">
+    <span class="glyphicon glyphicon-book"></span> SÁCH MỚI
+</div>
+<div class="row" style="min-height:600px">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-body" style="height:225px">
+                    <a href="@Url.Action("ChiTiet", new { id= item.MaSach})">
+                        <img src="~/Bia_sach/@item.AnhBia" style="width:150px; height:150px" /> <br />
+                        <div style="margin:10px;font-weight:bold"> @item.TenSach</div>
+                    </a>
+                </div>
+                <div class="panel-footer">
+                    Giá bán <span style="color:#ff0000; font-weight:bold">
+                        @Html.FormatValue(item.Dongia, "{0: #,##0} đồng")
+                    </span>
+                    <a href="@Url.Action("ChiTiet", new { id=item.MaSach})" class=" btn btn-success">
+                        Chi tiết
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

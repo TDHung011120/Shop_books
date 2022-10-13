@@ -1,0 +1,53 @@
+﻿
+@model MVC_BookStore.Models.RegisterAdmin
+@{
+    ViewBag.Title = "Đăng ký";
+}
+
+<h2>Đăng ký</h2>
+<hr />
+<form action="/Admin/Admins/ProcessRegister" method="get">
+    <div class="row">
+        <div class="form-group">
+            Họ Tên(*)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            Tên đăng nhập
+            @Html.TextBoxFor(m => m.User, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.User, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            Mật khẩu
+            @Html.PasswordFor(m => m.Pass, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            Nhập lại mật khẩu
+            @Html.PasswordFor(m => m.RePass, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.RePass, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            Ngày sinh
+            @Html.TextBoxFor(m => m.Born, new { @class = "form-control", @type = "date" })
+        </div>
+        <div class="form-group">
+            Email
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            Số điện thoại
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Đăng ký" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

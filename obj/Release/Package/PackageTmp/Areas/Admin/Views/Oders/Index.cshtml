@@ -1,0 +1,39 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<MVC_BookStore.Models.DonDatHang>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>DANH SÁCH CÁC ĐƠN ĐẶT HÀNG</h2>
+<hr />
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>Mã đơn hàng</th>
+        <th>Họ tên khách hàng</th>
+        <th>Số điện thoại</th>
+        <th>Địa chỉ giao hàng</th>
+        <th>Tình trạng</th>
+        <th>Trị giá đơn hàng</th>
+        <th>Tác vụ</th>
+    </tr>
+    <!--duyệt qua các đơn hàng-->
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SoDH</td>
+            <td>@item.KhachHang.HoTenKH</td>
+            <td>@item.KhachHang.Dienthoai</td>
+            <td>@item.KhachHang.Diachi</td>
+            <td>@(item.Dagiao==true?"Đã giao hàng":"Chưa giao hàng")</td>
+            <td>@Html.FormatValue(item.Trigia, "{0:#,##0} đồng")</td>
+            <td>@Html.FormatValue(item.Trigia, "{0:#,##0} đồng")</td>
+            <td>
+                <a href="@Url.Action("Detail", new { id= item.SoDH})" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></a>
+                <a href="@Url.Action("Delete", new { id= item.SoDH})" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+            </td>
+        </tr>
+    }
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+</div>

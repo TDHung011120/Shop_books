@@ -1,0 +1,55 @@
+﻿@model MVC_BookStore.Models.Sach
+@{
+    ViewBag.Title = "Thông tin chi tiết sách";
+}
+
+<div class="panel panel-success" style="margin-top:10px">
+    <div class="panel-heading">
+        <b>THÔNG TIN CHI TIẾT</b>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img src="~/Bia_sach/@Model.AnhBia" style="width:50%" />
+            </div>
+            <div class="col-md-8">
+                -Tên sách: <b>@Model.TenSach</b><br />
+                - Chủ đề : <b> @Model.ChuDe.Tenchude</b> <br />
+                - Nhà xuất bản : <b>@Model.NhaXuatBan.TenNXB</b> <br />
+                - Mô tả : @Html.Raw(Model.Mota)
+                <div style="margin-top:10px">
+                    <a href="@Url.Action("AddToCart","AddTocart", new { id = Model.MaSach })"
+                       class="btn btn-danger">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> Thêm vào giỏ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*Liệt kê các sách có cùng chủ đề*@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <b>SÁCH CÙNG CHỦ ĐỀ</b>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            @{
+                //lấy 5 quyền sách có cùng chủ đề với sách đang xem mà không có sách đang xem
+                var dsSachCungChuDe = Model.ChuDe.Saches.Where(x => x.MaSach != Model.MaSach).Take(5);
+            }
+            @foreach (var item in dsSachCungChuDe)//duyệt qua các sách có cùng chủ đề
+            {
+                <div class="col-md-3 panel-body text-center">
+                    <a href="@Url.Action("ChiTiet", new { id= item.MaSach})">
+                        <img src="~/Bia_sach/@item.AnhBia" /> <br />
+                        @item.TenSach <br />
+                        Giá bán <span style="color:#ff0000;font-weight:bold">
+                            @Html.FormatValue(item.Dongia, "{0:#,##0} đồng")
+                        </span>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

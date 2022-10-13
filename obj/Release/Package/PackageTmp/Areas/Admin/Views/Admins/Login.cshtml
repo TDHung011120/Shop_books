@@ -1,0 +1,31 @@
+﻿@model MVC_BookStore.Models.LoginUser
+<h2>Đăng nhập với tư cách quản trị viên</h2>
+<hr />
+@Html.Raw(ViewBag.TBLogin)
+<form action="/Admin/Admins/ProcessLogin" method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Tên đăng nhập (*)</label>
+                @Html.TextBoxFor(x => x.User, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.User, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Mật khẩu (*)</label>
+                @Html.PasswordFor(x => x.Pass, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Pass, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+            </div>
+            <div class="alert alert-warning">
+                Nếu chưa có tài khoản thì đăng ký <a href="@Url.Action("Register","Admins")"> tại đây</a>
+            </div>
+        </div>
+    </div>
+</form>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

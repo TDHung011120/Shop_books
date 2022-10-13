@@ -1,0 +1,41 @@
+﻿@model MVC_BookStore.Models.DonDatHang
+@{
+    ViewBag.Title = "Detail";
+}
+<form action="/Admin/Oders/Update" method="post">
+    <!--Trình bày đơn đặt hàng-->
+    <div style="margin-top:20px">
+        <div class="form-group">
+            Mã Đơn hàng:
+            @Html.TextBoxFor(m => m.SoDH, new { @class = "form-control", @readonly = "true" })
+        </div>
+        <div class="form-group">
+            Họ tên khách hàng:
+            @Html.TextBoxFor(m => m.KhachHang.HoTenKH, new { @class = "form-control", @readonly = "true" })
+        </div>
+        <div class="form-group">
+            Ngày đặt hàng:
+            @Html.TextBoxFor(m => m.NgayDH, new { @class = "form-control", @readonly = "true" })
+        </div>
+        <div class="form-group">
+            Ngày giao hàng:
+            @Html.TextBoxFor(m => m.Ngaygiao, new { @class = "form-control", @readonly = "true" })
+        </div>
+        <div class="form-group">
+            Địa chỉ:
+            @Html.TextBoxFor(m => m.KhachHang.Diachi, new { @class = "form-control", @readonly = "true" })
+        </div>
+        <div class="form-group">
+            Số điện thoại:
+            @Html.TextBoxFor(m => m.KhachHang.Dienthoai, new { @class = "form-control", @readonly = "true" })
+        </div>
+        <div class="form-group">
+            Tình trạng:
+            @Html.DropDownListFor(m => m.Dagiao, (SelectList)(ViewBag.TinhTrang), new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <input type="submit" value="Cập nhật" class="btn btn-success" />
+</form>
+

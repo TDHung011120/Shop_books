@@ -1,0 +1,11 @@
+﻿@model IEnumerable<MVC_BookStore.Models.ChuDe>
+@foreach (var item in Model)
+{
+    <li>
+        <a href="@Url.Action("SachTheoChuDe", new { id=item.MaCD})" style="text-transform:uppercase">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            @item.Tenchude <span class="badge">@item.Saches.Count</span>
+        </a>
+    </li>
+}
+
